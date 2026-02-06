@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Anamika ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Comic Sans MS', cursive;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #ffd1dc, #ff9eb5, #ff6f91);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
+h1 {
+    color: #8b0038;
+    font-size: clamp(2.1rem, 6vw, 3.2rem);
+    margin-bottom: 30px;
+    text-shadow: 0 4px 10px rgba(255,255,255,0.7);
+}
+
+.buttons {
+    position: relative;
+    width: 260px;
+    height: 140px;
+}
+
+button {
+    padding: 15px 32px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+#yesBtn {
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
+    color: white;
+}
+
+#noBtn {
+    background: linear-gradient(135deg, #e0e0e0, #cfcfcf);
+    color: #333;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.heart, .rose {
+    position: absolute;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+}
+
+.heart {
+    color: rgba(255, 0, 100, 0.6);
+    animation-duration: 6s;
+}
+
+.rose {
+    font-size: 28px;
+    animation-duration: 8s;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.8); opacity: 1; }
+    100% { transform: translateY(-800px) scale(1.4); opacity: 0; }
+}
+
+#loveScreen {
+    background: radial-gradient(circle at bottom, #ffe6eb, #ff9aa2, #ff5d8f);
+    opacity: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+    <source src="sahiba.mp3" type="audio/mpeg">
+</audio>
+
+<div class="screen" id="questionScreen">
+    <h1>Anamika, do you love me? 💖</h1>
+    <div class="buttons">
+        <button id="yesBtn">Yes 😘</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
+</div>
+
+<div class="screen" id="loveScreen">
+    <h1>I know baby, Anamika 💕<br>Love you too ❤️🌹</h1>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const questionScreen = document.getElementById('questionScreen');
+const loveScreen = document.getElementById('loveScreen');
+const music = document.getElementById('bgMusic');
+
+function moveNoButton() {
+    const container = document.querySelector('.buttons');
+    const rect = container.getBoundingClientRect();
+    const maxX = rect.width - noBtn.offsetWidth;
+    const maxY = rect.height - noBtn.offsetHeight;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+}
+
+noBtn.addEventListener('mouseover', moveNoButton);
+noBtn.addEventListener('touchstart', moveNoButton);
+
+yesBtn.addEventListener('click', () => {
+    questionScreen.style.opacity = 0;
+    music.play();
+    setTimeout(() => {
+        questionScreen.style.display = 'none';
+        loveScreen.style.opacity = 1;
+        loveScreen.style.pointerEvents = 'auto';
+        createRoses();
+    }, 800);
+});
+
+setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.bottom = '-20px';
+    heart.style.fontSize = (18 + Math.random() * 22) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+
+function createRoses() {
+    setInterval(() => {
+        const rose = document.createElement('div');
+        rose.className = 'rose';
+        rose.innerHTML = '🌹';
+        rose.style.left = Math.random() * window.innerWidth + 'px';
+        rose.style.bottom = '-30px';
+        document.body.appendChild(rose);
+        setTimeout(() => rose.remove(), 8000);
+    }, 500);
+}
+</script>
+
+</body>
+</html>
